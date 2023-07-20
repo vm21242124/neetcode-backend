@@ -6,14 +6,20 @@ import dotenv from 'dotenv'
 import UserRoute from './Routes/User.route.js'
 import { config } from './config/config.js'
 import cookieparser from 'cookie-parser'
+import cors from 'cors'
 const app=express()
 
 //middelware
-app.use(cookieparser())
-dotenv.config()
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
 //db
+app.use(cors({
+    origin:"http://localhost:3000",
+    credentials:true
+}))
+app.use(cookieparser())
+dotenv.config()
+
 await conn()
 
 
