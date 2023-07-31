@@ -12,27 +12,19 @@ const schema = new mongoose.Schema({
     required: [true, "description is required"],
   },
   examples: {
-    type: [
-      {
-        input: String,
-        output: String,
-        explanation:String
-      },
-    ],
+    type:String,
     required: [true, "example is required"],
   },
-  testcases: {
-    type: [
-      {
-        input_data: String,
-        expected_output: String,
-      },
-    ],
+  stdin: {
+    type:String,
+    required:true
+  },
+  stdout: {
+    type:String,
+    required:true
   },
   constraint: {
-    type: [{
-        con:String
-    }],
+    type: String,
     required: [true, "example is required"],
   },
   level: {
