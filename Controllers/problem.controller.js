@@ -61,33 +61,32 @@ export const getAproblemById = async (req, res) => {
 export const submitCode = async (req, res) => {
   const { id } = req.params;
   const { code, stdin, lang } = req.body;
-  
+
+  let langid;
+  if (lang === "python") langid = 71;
+  else if (lang == "cpp") langid = 54;
+  else langid = 62;
   try {
-    let langid;
-    if(lang==='python')langid=71;
-    else if(lang=='cpp')langid=54;
-    else langid=62;
-
-    const token = await sendTojuge(
-      code,
-      stdin,
-      langid
-    );
-
-    res.status(200).json(token)
-    
-
+    const r = await sendTojuge(code, stdin, langid);
+    return res.status(200).json(r);
   } catch (error) {
-    res.status(400).json(error.message)
+    res.status(400).json(error);
   }
-
 };
-export const getOutput=async(req,res)=>{
-  const {token}=req.params;
-try {
-  const op=await getfromjudge(token)
-  res.status(200).json(op)
-} catch (error) {
-  res.status(400).json(error.message)
-}
-}
+export const getOutput = async (req, res) => {
+  const { token } = req.params;
+  try {
+    const response = await getfromjudge(token);
+    if (!response.err) {
+      return res.status(200).json(response);
+    } else {
+      res.status(400).json({
+        msg: "compilation error",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      error: "An internal error occurred",
+    });
+  }
+};
