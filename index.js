@@ -26,7 +26,7 @@ await conn()
 
 
 
-app.listen(5000,()=>console.log("server on"))
+app.listen(process.env.PORT,()=>console.log(`server on PORT ${process.env.PORT}`))
 
 
 app.use('/problem',problemRoute)
