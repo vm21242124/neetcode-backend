@@ -15,8 +15,8 @@ app.use(bodyparser.json())
 //db
 app.use(cors({
     // origin:"http://localhost:3000",
-    origin:"neetcodex.netlify.app",
-    // origin:"https://neetcodex.onrender.com",
+    // origin:"neetcodex.netlify.app",
+    origin:"https://neetcodex.onrender.com",
     credentials:true
 }))
 app.use(cookieparser())
