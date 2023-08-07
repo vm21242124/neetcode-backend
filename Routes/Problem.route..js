@@ -6,6 +6,6 @@ router.post('/create',IsLoggedIn, createProblem);
 router.get('/all',getAllProblems);
 router.delete('/delete/:id',IsLoggedIn,deleteAProblem)
 router.get('/:id',getAproblemById)
-router.post('/submit/:id',IsLoggedIn,submitCode)
-router.get('/getop/:token',IsLoggedIn,getOutput)
+router.post('/submit/:id',submitCode)
+router.get('/getop/:token',getOutput)
 export default router
