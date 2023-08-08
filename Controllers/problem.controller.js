@@ -4,9 +4,7 @@ import { ProblemModel } from "../models/ProblemSchema.js";
 export const createProblem = async (req, res) => {
   const { title, description, examples, constraint, level, stdin, stdout } =
     req.body;
-    if(req.user.role!=='ADMIN'){
-      return res.status(403).json("you are not allowed to this route")
-    }
+   
 
   try {
     const problem = new ProblemModel({
@@ -37,9 +35,7 @@ export const getAllProblems = async (req, res) => {
 };
 export const deleteAProblem = async (req, res) => {
   const { id } = req.params;
-  if(req.user.role!=='ADMIN'){
-    return res.status(403).json("you are not allowed to this route")
-  }
+
   try {
     const problem = await ProblemModel.findByIdAndDelete(id);
     if (!problem) {
